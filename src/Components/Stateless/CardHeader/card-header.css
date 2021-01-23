@@ -1,0 +1,10 @@
+.card-header-wrapper {
+  padding: 1rem;
+  border-bottom: 1px solid #eaeaea;
+}
+.card-header {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  color: var(--primary-color);
+}

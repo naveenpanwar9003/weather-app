@@ -1,0 +1,45 @@
+.weather-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.weather-img {
+  margin-right: 1rem;
+}
+
+.weather-img img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.temp {
+  font-size: 40px;
+  font-weight: 400;
+  color: var(--primary-color);
+  position: relative;
+  margin-right: 1.2rem;
+}
+
+.temp::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -15px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50px;
+  border: 3px solid var(--primary-color);
+}
+
+.metric {
+  font-size: 40px;
+  font-weight: 400;
+  color: var(--primary-text-dark);
+}
+
+.location {
+  color: var(--primary-text-dark);
+  font-size: 1rem;
+}

@@ -1,0 +1,8 @@
+.wind-card .other-details-list {
+  margin-top: 0;
+}
+
+.wind-card {
+  grid-column: 2 / auto;
+  grid-row: 3 / auto;
+}
