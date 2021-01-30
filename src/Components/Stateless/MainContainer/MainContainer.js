@@ -1,21 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 import "./main-container.css";
 import Form from "../../Statefull/Form/Form";
 import WeatherContainer from "../WeatherContainer/WeatherContainer";
 import CordinatesContainer from "../CordinatesContainer/CordinatesContainer";
 import WindContainer from "../WindContainer/WindContainer";
+import Error from "../Error/Error";
 
 const MainContainer = () => {
-  return (
-    <div className='main-container'>
-      <Form />
-      <WeatherContainer />
-      <div>
-        <CordinatesContainer />
-        <WindContainer />
+  const [result, setResult] = useState(null);
+  const [inputValue, setInputValue] = useState("");
+  const [error, seterror] = useState(null);
+  const [imgPath, setImgPath] = useState("");
+
+  const handleChange = (e) => {
+    let value = e.target.value || "";
+    setInputValue(value);
+  };
+
+  const getResult = async () => {
+    let api = `http://api.openweathermap.org/data/2.5/weather?q=${inputValue}&APPID=ff9ee543810318a7b86c44f55044b656&units=metric`;
+
+    let response = await fetch(api);
+
+    if (!response.ok) {
+      seterror(response.statusText);
+    } else {
+      let data = await response.json();
+      setResult(data);
+      let imageCode = data.weather[0].icon;
+      let imgPath = `http://openweathermap.org/img/wn/${imageCode}@2x.png`;
+      setImgPath(imgPath);
+
+      seterror(null);
+      setInputValue("");
+    }
+  };
+
+  if (result) {
+    return (
+      <div className='main-container'>
+        {error ? <Error error={error} /> : false}
+        <Form
+          handleChange={handleChange}
+          inputValue={inputValue}
+          onSubmit={getResult}
+        />
+        <WeatherContainer resultData={result} imgPath={imgPath} />
+        <div>
+          <CordinatesContainer cordinates={result.coord} />
+          <WindContainer wind={result.wind} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className='main-container'>
+        {error ? <Error error={error} /> : false}
+        <Form
+          handleChange={handleChange}
+          inputValue={inputValue}
+          onSubmit={getResult}
+        />
+      </div>
+    );
+  }
 };
 
 export default MainContainer;

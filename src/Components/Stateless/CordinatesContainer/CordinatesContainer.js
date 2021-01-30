@@ -4,17 +4,17 @@ import CardHeader from "../CardHeader/CardHeader";
 
 import "./cordinates-container.css";
 
-const CordinatesContainer = () => {
+const CordinatesContainer = (props) => {
   return (
     <div className='card cordinates-card'>
       <CardHeader title='Cordinates' />
       <div className='card-content'>
         <ul className='other-details-list'>
           <li>
-            Longitude: <span>-0.1257</span>
+            Longitude: <span>{props.cordinates.lon}</span>
           </li>
           <li>
-            Latitude: <span>51.5085</span>
+            Latitude: <span>{props.cordinates.lat}</span>
           </li>
         </ul>
       </div>

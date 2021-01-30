@@ -1,0 +1,12 @@
+.error-container {
+  padding: 0.5rem 1rem;
+  background-color: #ff0537;
+  grid-column: 1/-1;
+  border-radius: 3px;
+}
+
+.error-container h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
