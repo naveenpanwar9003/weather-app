@@ -37,6 +37,28 @@ label {
   min-width: 140px;
   text-align: center;
   transition: 0.2s ease-in-out;
+  position: relative;
+}
+
+.form-btn:disabled {
+  color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-btn:disabled::after {
+  content: "";
+  width: 15px;
+  height: 15px;
+  border: 2px solid #fff;
+  border-top-color: transparent;
+  animation-name: rotate;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  border-radius: 50px;
+  position: absolute;
 }
 
 .form-btn:hover {

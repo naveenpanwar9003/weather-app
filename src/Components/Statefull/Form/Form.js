@@ -1,7 +1,7 @@
 import React from "react";
 import "./form.css";
 
-const Form = ({ handleChange, inputValue, onSubmit }) => {
+const Form = ({ handleChange, inputValue, onSubmit, getResultPending }) => {
   return (
     <div className='card form-card'>
       <div className='form-container'>
@@ -17,7 +17,12 @@ const Form = ({ handleChange, inputValue, onSubmit }) => {
             value={inputValue}
             className='input'
           />
-          <button type='submit' className='form-btn' onClick={onSubmit}>
+          <button
+            type='submit'
+            className='form-btn'
+            onClick={onSubmit}
+            disabled={getResultPending ? "disable" : ""}
+          >
             Search
           </button>
         </div>

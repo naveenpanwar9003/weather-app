@@ -10,7 +10,8 @@ const MainContainer = () => {
   const [result, setResult] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [error, seterror] = useState(null);
-  const [imgPath, setImgPath] = useState("");
+  const [imgPath, setImgPath] = useState(null);
+  const [getResultPending, setgetResultPending] = useState(false);
 
   const handleChange = (e) => {
     let value = e.target.value || "";
@@ -18,22 +19,24 @@ const MainContainer = () => {
   };
 
   const getResult = async () => {
+    let imgPath = null;
+    setgetResultPending(true);
     let api = `https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&APPID=ff9ee543810318a7b86c44f55044b656&units=metric`;
 
     let response = await fetch(api);
-
     if (!response.ok) {
       seterror(response.statusText);
     } else {
       let data = await response.json();
       setResult(data);
       let imageCode = data.weather[0].icon;
-      let imgPath = `http://openweathermap.org/img/wn/${imageCode}@2x.png`;
+      imgPath = `https://openweathermap.org/img/wn/${imageCode}@2x.png`;
       setImgPath(imgPath);
 
       seterror(null);
       setInputValue("");
     }
+    setgetResultPending(false);
   };
 
   if (result) {
@@ -44,6 +47,7 @@ const MainContainer = () => {
           handleChange={handleChange}
           inputValue={inputValue}
           onSubmit={getResult}
+          getResultPending={getResultPending}
         />
         <WeatherContainer resultData={result} imgPath={imgPath} />
         <div>

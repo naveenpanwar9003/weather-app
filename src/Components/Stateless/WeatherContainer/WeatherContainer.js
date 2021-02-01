@@ -1,16 +1,26 @@
-import React from "react";
-
+import React, { useState } from "react";
 import CardHeader from "../CardHeader/CardHeader";
+import ImgLoader from "../ImgLoader/ImgLoader";
+
 import "./weather-container.css";
 
 const WeatherContainer = ({ resultData, imgPath }) => {
+  const [isImageloaded, setisImageloaded] = useState(false);
+
   return (
     <div className='card'>
       <CardHeader title='Weather' />
       <div className='card-content'>
         <div className='weather-row'>
           <div className='weather-img'>
-            <img src={imgPath} alt='weather' />
+            {!resultData ? setisImageloaded(false) : false}
+            <img
+              src={imgPath}
+              alt='weather'
+              style={{ display: isImageloaded ? "block" : "none" }}
+              onLoad={() => setisImageloaded(true)}
+            />
+            {isImageloaded ? false : <ImgLoader />}
           </div>
           <div className='card-details'>
             <div className='weather-top'>
