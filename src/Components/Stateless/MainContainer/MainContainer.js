@@ -18,7 +18,7 @@ const MainContainer = () => {
   };
 
   const getResult = async () => {
-    let api = `http://api.openweathermap.org/data/2.5/weather?q=${inputValue}&APPID=ff9ee543810318a7b86c44f55044b656&units=metric`;
+    let api = `https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&APPID=ff9ee543810318a7b86c44f55044b656&units=metric`;
 
     let response = await fetch(api);
 
